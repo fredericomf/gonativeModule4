@@ -452,3 +452,10 @@ sagaMiddleware.run(rootSaga);
 export default store;
 ```
 
+## IPHONE X HELPER
+
+Used to return the statusbar dimensions
+
+```bash
+yarn add react-native-iphone-x-helper
+```
