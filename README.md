@@ -61,12 +61,12 @@ This plugin is configured in /src/config/ReactotronConfig.js
 Here is an example of Config file:
 
 ```javascript
-import Reactotron from 'reactotron-react-native';
-import { reactotronRedux } from 'reactotron-redux';
+import Reactotron from "reactotron-react-native";
+import { reactotronRedux } from "reactotron-redux";
 
 // STUDY_NOTES: '__DEV__' is an envirionment variable (only disponible on NATIVE)
 if (__DEV__) {
-  const tron = Reactotron.configure({ host: '192.168.0.30' }) // controls connection & communication settings
+  const tron = Reactotron.configure({ host: "192.168.0.30" }) // controls connection & communication settings
     .useReactNative() // add all built-in react native plugins
     .use(reactotronRedux()) // add the reactrotron-redux plugin
     .connect(); // let's connect!
@@ -77,6 +77,7 @@ if (__DEV__) {
   console.tron = tron;
 }
 ```
+
 If Reactotron don't connect with your development device, configure your machine ip in ReactotronConfig.js like this example:
 
 ```javascript
@@ -275,14 +276,16 @@ react-native link react-native-gesture-handler
 
 Now, is necessary to edit MainActivity.java file, of Android package, to complete the plugin installation:
 
-* Add this imports:
+- Add this imports:
+
 ```java
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 ```
 
-* Now, add following function:
+- Now, add following function:
+
 ```java
 @Override
 protected ReactActivityDelegate createReactActivityDelegate() {
@@ -359,12 +362,12 @@ Now, we'll to edit ReactotronConfig.js and set the reactotron-redux plugin.
 This is the final version of file:
 
 ```javascript
-import Reactotron from 'reactotron-react-native';
-import { reactotronRedux } from 'reactotron-redux';
+import Reactotron from "reactotron-react-native";
+import { reactotronRedux } from "reactotron-redux";
 
 // STUDY_NOTES: '__DEV__' is an envirionment variable (only disponible on NATIVE)
 if (__DEV__) {
-  const tron = Reactotron.configure({ host: '10.8.21.208' }) // controls connection & communication settings
+  const tron = Reactotron.configure({ host: "10.8.21.208" }) // controls connection & communication settings
     .useReactNative() // add all built-in react native plugins
     .use(reactotronRedux()) // add the reactrotron-redux plugin
     .connect(); // let's connect!
@@ -383,11 +386,12 @@ Used for stylization of components, for mobile or web:
 ```bash
 yarn add styled-components
 ```
+
 NOTE: An advantage is to use the same css syntax from Web into React-Native.
 
 ## REDUX-SAGA
 
-Plugin used to easily manage async calls. 
+Plugin used to easily manage async calls.
 
 ```bash
 yarn add redux-saga
@@ -400,16 +404,17 @@ Plugin used to catch and inspect saga requests treatment
 ```bash
 yarn add reactotron-redux-saga
 ```
+
 Edit ReactotronConfig.js:
 
 ```javascript
-import Reactotron from 'reactotron-react-native';
-import { reactotronRedux } from 'reactotron-redux';
-import reactotronSaga from 'reactotron-redux-saga';
+import Reactotron from "reactotron-react-native";
+import { reactotronRedux } from "reactotron-redux";
+import reactotronSaga from "reactotron-redux-saga";
 
 // STUDY_NOTES: '__DEV__' is an envirionment variable (only disponible on NATIVE)
 if (__DEV__) {
-  const tron = Reactotron.configure({ host: '192.168.0.30' }) // controls connection & communication settings
+  const tron = Reactotron.configure({ host: "192.168.0.30" }) // controls connection & communication settings
     .useReactNative() // add all built-in react native plugins
     .use(reactotronRedux()) // add the reactrotron-redux plugin
     .use(reactotronSaga)
@@ -425,11 +430,11 @@ if (__DEV__) {
 Edit store/index.js:
 
 ```javascript
-import { createStore, compose, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore, compose, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
 
-import combinedReducers from './reducers';
-import rootSaga from './sagas';
+import combinedReducers from "./reducers";
+import rootSaga from "./sagas";
 
 const middlewares = [];
 
@@ -440,9 +445,9 @@ middlewares.push(sagaMiddleware);
 
 const composer = __DEV__
   ? compose(
-    applyMiddleware(...middlewares),
-    console.tron.createEnhancer(),
-  )
+      applyMiddleware(...middlewares),
+      console.tron.createEnhancer()
+    )
   : applyMiddleware(...middlewares);
 
 const store = createStore(combinedReducers, composer);
@@ -458,4 +463,55 @@ Used to return the statusbar dimensions
 
 ```bash
 yarn add react-native-iphone-x-helper
+```
+
+## JSON SERVER
+
+Must be globally installed
+
+```bash
+yarn add global json-server
+```
+
+or
+
+```bash
+sudo npm install -g json-server
+```
+
+The JSON used from this server is /server.json
+
+How to run:
+
+```bash
+json-server server.json
+```
+
+If you get a "Cannot reach page" erro, then try this:
+
+```bash
+json-server --host YOUR_MACHINE_IP server.json
+```
+
+More informations about this issue: https://stackoverflow.com/questions/51026532/json-server-cannot-access-via-local-ip
+
+## REDUXSAUCE SEAMLESS-IMMUTABLE
+
+Reduxsauce implements some tools to make easy the development of ducks (that contains Reducers and Actions at same time)
+**You can see a example use in /src/store/ducks/podcasts.js**
+
+```bash
+yarn add reduxsauce seamless-immutable
+```
+
+## REACT NATIVE VECTOR ICONS
+
+```bash
+yarn add react-native-vector-icons
+```
+
+after
+
+```bash
+react-native link react-native-vector-icons
 ```
